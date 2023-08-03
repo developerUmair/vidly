@@ -8,6 +8,7 @@ import Posts from "./routing-com/posts";
 import Dashboard from "./routing-com/admin/dashboard";
 import Home from "./routing-com/home";
 import ProductDetails from "./routing-com/productDetails";
+import NotFound from "./routing-com/notFound";
 
 const App = () => {
   const initialCounters = [
@@ -49,7 +50,7 @@ const App = () => {
     newCounters[index].value--;
     setCounters(newCounters);
   };
-
+  const shouldShowCustomMessage = true;
   return (
     <>
       {/* <Navbar
@@ -75,6 +76,8 @@ const App = () => {
             <Route path="/posts/:year?/:month?" element={<Posts />} exact />
             <Route path="/admin" element={<Dashboard />} exact />
             <Route path="/" element={<Home />} exact />
+            <Route path="*" element={<NotFound />}  />
+            
           </Routes>
         </div>
       </main>
