@@ -21,14 +21,15 @@ class ProductDetails extends Component {
 export default ProductDetails; */
 
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProductDetails = (props) => {
+  const navigate = useNavigate();
 
   const handleSave = () => {
-
-  }
-  const {id} = useParams()
+    navigate("/products", { replace: true });
+  };
+  const { id } = useParams();
   return (
     <div>
       <h1>Product Details - {id}</h1>

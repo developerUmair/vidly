@@ -2,13 +2,18 @@ import { useState } from "react";
 import Counters from "./components/Counters";
 import Movies from "./components/Movies";
 import NavBar from "./routing-com/navbar";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Products from "./routing-com/products";
-import Posts from "./routing-com/posts";
+import Posts from "./routing-com/admin/posts";
 import Dashboard from "./routing-com/admin/dashboard";
 import Home from "./routing-com/home";
 import ProductDetails from "./routing-com/productDetails";
 import NotFound from "./routing-com/notFound";
+import Users from "./routing-com/admin/users";
+import NavMenu from "./components/NavMenu";
+import Rentals from "./components/Rentals";
+import Customers from "./components/Customers";
+import MoviesId from "./components/MoviesId";
 
 const App = () => {
   const initialCounters = [
@@ -56,8 +61,16 @@ const App = () => {
       {/* <Navbar
         totalCounters={counters.filter((counter) => counter.value > 0).length}
       /> */}
+      <NavMenu />
       <main className="container">
-        {/* <Movies /> */}
+        <Routes>
+        <Route path="/" element={<Navigate to="/movies" />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/rentals" element={<Rentals />} />
+          <Route path="/*" element={<NotFound />} />
+          <Route path="/movies/:id" element={<MoviesId />} />
+        </Routes>
         {/* <Counters
           counters={counters}
           onReset={handleReset}
@@ -66,19 +79,20 @@ const App = () => {
           onDecrement={handleDecrement}
         /> */}
 
-        <NavBar />
+        {/* <NavBar /> */}
         <div className="content">
-          <Routes>
+          {/* <Routes>
             <Route path="products/:id" element={<ProductDetails />} />
-            {/* <Route path="/products" exact render={(props) => <Products sortBy="newest" {...props} />} /> */}
+            <Route path="/products" exact render={(props) => <Products sortBy="newest" {...props} />} />
             <Route path="/products" element={<Products />} exact />
             <Route path="/posts" element={<Posts />} exact />
             <Route path="/posts/:year?/:month?" element={<Posts />} exact />
             <Route path="/admin" element={<Dashboard />} exact />
             <Route path="/" element={<Home />} exact />
-            <Route path="*" element={<NotFound />}  />
-            
-          </Routes>
+            <Route path="*" element={<NotFound />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/posts" element={<Posts />} />
+          </Routes> */}
         </div>
       </main>
     </>
