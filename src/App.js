@@ -1,7 +1,13 @@
 import { useState } from "react";
 import Counters from "./components/Counters";
-import Navbar from "./components/Navbar";
 import Movies from "./components/Movies";
+import NavBar from "./routing-com/navbar";
+import { Route, Routes } from "react-router-dom";
+import Products from "./routing-com/products";
+import Posts from "./routing-com/posts";
+import Dashboard from "./routing-com/admin/dashboard";
+import Home from "./routing-com/home";
+import ProductDetails from "./routing-com/productDetails";
 
 const App = () => {
   const initialCounters = [
@@ -46,11 +52,11 @@ const App = () => {
 
   return (
     <>
-      <Navbar
+      {/* <Navbar
         totalCounters={counters.filter((counter) => counter.value > 0).length}
-      />
+      /> */}
       <main className="container">
-        <Movies />
+        {/* <Movies /> */}
         {/* <Counters
           counters={counters}
           onReset={handleReset}
@@ -58,6 +64,19 @@ const App = () => {
           onIncrement={handleIncrement}
           onDecrement={handleDecrement}
         /> */}
+
+        <NavBar />
+        <div className="content">
+          <Routes>
+            <Route path="products/:id" element={<ProductDetails />} />
+            {/* <Route path="/products" exact render={(props) => <Products sortBy="newest" {...props} />} /> */}
+            <Route path="/products" element={<Products />} exact />
+            <Route path="/posts" element={<Posts />} exact />
+            <Route path="/posts/:year/:month" element={<Posts />} exact />
+            <Route path="/admin" element={<Dashboard />} exact />
+            <Route path="/" element={<Home />} exact />
+          </Routes>
+        </div>
       </main>
     </>
   );
