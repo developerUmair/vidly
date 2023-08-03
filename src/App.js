@@ -72,7 +72,7 @@ const App = () => {
             {/* <Route path="/products" exact render={(props) => <Products sortBy="newest" {...props} />} /> */}
             <Route path="/products" element={<Products />} exact />
             <Route path="/posts" element={<Posts />} exact />
-            <Route path="/posts/:year/:month" element={<Posts />} exact />
+            <Route path="/posts/:year?/:month?" element={<Posts />} exact />
             <Route path="/admin" element={<Dashboard />} exact />
             <Route path="/" element={<Home />} exact />
           </Routes>
