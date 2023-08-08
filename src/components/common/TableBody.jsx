@@ -7,9 +7,13 @@ const TableBody = ({ paginatedList, onLike, onDelete }) => {
     <>
       {paginatedList.map((movie) => (
         <tr key={movie._id}>
-          {console.log(movie._id)}
           <td>
-            <Link to={`movies/${movie._id}`}>{movie.title} </Link>
+            <Link
+              to={`/movies/${movie._id}`}
+              className="text-decoration-none hover:text-decoration-underline"
+            >
+              {movie.title}
+            </Link>
           </td>
           <td>{movie.genre.name}</td>
           <td>{movie.numberInStock}</td>

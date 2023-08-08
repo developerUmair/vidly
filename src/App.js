@@ -14,6 +14,7 @@ import NavMenu from "./components/NavMenu";
 import Rentals from "./components/Rentals";
 import Customers from "./components/Customers";
 import MoviesId from "./components/MoviesId";
+import LoginForm from "./components/LoginForm";
 
 const App = () => {
   const initialCounters = [
@@ -68,6 +69,7 @@ const App = () => {
           <Route path="/movies" element={<Movies />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/rentals" element={<Rentals />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/*" element={<NotFound />} />
           <Route path="/movies/:id" element={<MoviesId />} />
         </Routes>
