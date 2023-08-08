@@ -1,7 +1,20 @@
 import { useState } from "react";
 import Counters from "./components/Counters";
-import Navbar from "./components/Navbar";
 import Movies from "./components/Movies";
+import NavBar from "./routing-com/navbar";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Products from "./routing-com/products";
+import Posts from "./routing-com/admin/posts";
+import Dashboard from "./routing-com/admin/dashboard";
+import Home from "./routing-com/home";
+import ProductDetails from "./routing-com/productDetails";
+import NotFound from "./routing-com/notFound";
+import Users from "./routing-com/admin/users";
+import NavMenu from "./components/NavMenu";
+import Rentals from "./components/Rentals";
+import Customers from "./components/Customers";
+import MoviesId from "./components/MoviesId";
+import LoginForm from "./components/LoginForm";
 
 const App = () => {
   const initialCounters = [
@@ -43,14 +56,23 @@ const App = () => {
     newCounters[index].value--;
     setCounters(newCounters);
   };
-
+  const shouldShowCustomMessage = true;
   return (
     <>
-      <Navbar
+      {/* <Navbar
         totalCounters={counters.filter((counter) => counter.value > 0).length}
-      />
+      /> */}
+      <NavMenu />
       <main className="container">
-        <Movies />
+        <Routes>
+        <Route path="/" element={<Navigate to="/movies" />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/rentals" element={<Rentals />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/*" element={<NotFound />} />
+          <Route path="/movies/:id" element={<MoviesId />} />
+        </Routes>
         {/* <Counters
           counters={counters}
           onReset={handleReset}
@@ -58,6 +80,22 @@ const App = () => {
           onIncrement={handleIncrement}
           onDecrement={handleDecrement}
         /> */}
+
+        {/* <NavBar /> */}
+        <div className="content">
+          {/* <Routes>
+            <Route path="products/:id" element={<ProductDetails />} />
+            <Route path="/products" exact render={(props) => <Products sortBy="newest" {...props} />} />
+            <Route path="/products" element={<Products />} exact />
+            <Route path="/posts" element={<Posts />} exact />
+            <Route path="/posts/:year?/:month?" element={<Posts />} exact />
+            <Route path="/admin" element={<Dashboard />} exact />
+            <Route path="/" element={<Home />} exact />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/posts" element={<Posts />} />
+          </Routes> */}
+        </div>
       </main>
     </>
   );

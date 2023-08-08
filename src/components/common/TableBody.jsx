@@ -1,12 +1,20 @@
 import React from "react";
 import Like from "./Like";
+import { Link } from "react-router-dom";
 
 const TableBody = ({ paginatedList, onLike, onDelete }) => {
   return (
     <>
       {paginatedList.map((movie) => (
         <tr key={movie._id}>
-          <td>{movie.title}</td>
+          <td>
+            <Link
+              to={`/movies/${movie._id}`}
+              className="text-decoration-none hover:text-decoration-underline"
+            >
+              {movie.title}
+            </Link>
+          </td>
           <td>{movie.genre.name}</td>
           <td>{movie.numberInStock}</td>
           <td>{movie.dailyRentalRate}</td>
