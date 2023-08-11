@@ -15,6 +15,9 @@ import Rentals from "./components/Rentals";
 import Customers from "./components/Customers";
 import MoviesId from "./components/MoviesId";
 import LoginForm from "./components/LoginForm";
+import Register from "./components/Register";
+import ToastEx from "./components/ToastEx";
+import MovieForm from "./components/MovieForm";
 
 const App = () => {
   const initialCounters = [
@@ -72,6 +75,9 @@ const App = () => {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/*" element={<NotFound />} />
           <Route path="/movies/:id" element={<MoviesId />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/toast" element={<ToastEx />} />
+          <Route path="/movies/new" element={<MovieForm />} />
         </Routes>
         {/* <Counters
           counters={counters}

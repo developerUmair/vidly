@@ -32,6 +32,12 @@ const NavMenu = () => {
           <Link className="nav-item nav-link" to="/rentals">
             Rentals
           </Link>
+          <Link className="nav-item nav-link" to="/register">
+            Register
+          </Link>
+          <Link className="nav-item nav-link" to="/toast">
+            Toastify Examples
+          </Link>
         </div>
       </div>
     </nav>
