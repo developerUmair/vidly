@@ -1,40 +1,43 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { BiSolidShow, BiSolidHide } from "react-icons/bi";
 import Input from "./common/Input";
+import Joi from "joi";
 
 const LoginForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [account, setAccount] = useState({
+  const [data, setAccount] = useState({
     username: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
 
-  const validate = () => {
-    const errors = {};
+  const schema = Joi.object({
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
+  });
 
-    if (account.username.trim() === "")
-      errors.username = "Username is required";
-
-    if (account.password.trim() === "") {
-      errors.password = "Password is required";
+  const validate = async () => {
+    try {
+      await schema.validateAsync(data, { abortEarly: false });
+      return {};
+    } catch (validationError) {
+      const errors = {};
+      for (const detail of validationError.details) {
+        errors[detail.context.key] = detail.message;
+      }
+      return errors;
     }
-    return Object.keys(errors).length === 0 ? {} : errors;
   };
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const errors = validate();
-    console.log(errors);
-    setErrors(errors);
+    const validationErrors = await validate();
+    setErrors(validationErrors);
 
-    if (Object.keys(errors).length !== 0) return; // Check for errors using the length of keys
+    if (Object.keys(validationErrors).length !== 0) return;
 
     // request to the server
     console.log("submitted");
@@ -55,7 +58,7 @@ const LoginForm = () => {
         <Input
           name="username"
           label="Username"
-          value={account.username}
+          value={data.username}
           onChange={handleChange}
           placeholder="Enter username"
           type="text"
@@ -65,7 +68,7 @@ const LoginForm = () => {
         <Input
           name="password"
           label="Password"
-          value={account.password}
+          value={data.password}
           onChange={handleChange}
           placeholder="Enter Password"
           type="password"

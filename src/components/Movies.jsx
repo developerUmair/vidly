@@ -6,8 +6,11 @@ import Pagination from "./common/Pagination";
 import { paginate } from "../utils/Paginate";
 import ListGroup from "./common/ListGroup";
 import MoviesTable from "./MoviesTable";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Movies = () => {
+  const [count, setCount] = useState(0);
   const [moviesList, setMoviesList] = useState({
     totalMovies: [],
     genres: [],
@@ -15,6 +18,14 @@ const Movies = () => {
     currentPage: 1,
     selectedGenre: "",
   });
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+    toast.success(`Count incremented! and count is ${count}`, {
+      position: "top-right",
+      autoClose: 2000, // Close after 2 seconds
+    });
+  };
 
   const handleDeleteMovie = (movieId) => {
     const updatedMovieList = moviesList.totalMovies.filter(
@@ -114,6 +125,9 @@ const Movies = () => {
           />
         </div>
         <div className="col">
+          <Link to="/movies/new">
+            <button className="btn btn-primary my-2">Add Movie</button>
+          </Link>
           <h5 className="py-3">
             There are {arrLength ? arrLength : "no"} movies in the database.
           </h5>
@@ -134,6 +148,13 @@ const Movies = () => {
             handleDeleteMovie={handleDeleteMovie}
           />
         </div>
+      </div>
+
+      <div>
+        {count}
+        <br />
+
+        <button onClick={handleIncrement}>Trigger Toast</button>
       </div>
     </>
   );
